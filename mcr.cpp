@@ -31,15 +31,35 @@ int main(){
 				cout << "Player 2: ";
 			cout << "Which cell to mark? i:[0..2], j:[0..2]: ";
 			cin >> i >> j;
-			while (i < 0 || i >2 || j < 0 || j > 2 || game[i][j] != ' '){
+			while (i < 0 || i >2 || j < 0 || j > 2 || game[i][j] != ' ')//Add boundary judgment and repeated drop judgment
+                {
                 cout << "error! Please reenter the location!\n";
                 if (turn == false)
                     cout << "Player 1: ";
                 else
                     cout << "Player 2: ";
-                cout << "Which cell to mark? i:[0..2], j:[0..2]: ";
+                cout << "Which cell to mark? i:[0..2], j:[0..2]: ";  //Redefine input range
                 cin >> i >> j;
 			}
 
 			if (turn == false)
 			   game[i][j] = 'X';
+			else
+			   game[i][j] = 'O';
+			if (isWin(game)){
+				cout << "Win!" << endl;
+				break; // need to terminate the problem
+			}
+		}
+		if (!isWin(game))//Optimize the judgment for tie situations
+            {
+            cout << "Tie!" << endl;
+		} // if no winner after all moves
+
+
+	// show the game to console
+	cout << game[0][0] << " " << game[0][1] << " " << game[0][2] << endl;
+	cout << game[1][0] << " " << game[1][1] << " " << game[1][2] << endl;
+	cout << game[2][0] << " " << game[2][1] << " " << game[2][2] << endl;
+	return 0;
+}
